@@ -94,7 +94,6 @@ jsonschema-specifications==2025.4.1
 keyring==25.6.0
 kiwisolver==1.4.8
 kubernetes==33.1.0
-langchain==0.3.26
 langchain-community==0.3.27
 langchain-core==0.3.67
 langchain-text-splitters==0.3.8
