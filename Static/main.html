@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini's Chatbot 🤖</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+        #chatbox { width: 100%; max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+        .msg { margin: 10px 0; }
+        .user { text-align: right; color: blue; }
+        .bot { text-align: left; color: green; }
+    </style>
+</head>
+<body>
+    <div id="chatbox">
+        <h2>🤖 Mini's Chatbot</h2>
+        <div id="messages"></div>
+        <input id="input" type="text" placeholder="Ask something..." style="width: 80%;">
+        <button onclick="send()">Send</button>
+    </div>
+
+    <script>
+        async function send() {
+            const input = document.getElementById("input");
+            const msg = input.value;
+            if (!msg) return;
+
+            addMessage("user", msg);
+            input.value = "";
+
+            const res = await fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ question: msg })
+            });
+
+            const data = await res.json();
+            addMessage("bot", data.chatbot_says);
+        }
+
+        function addMessage(type, text) {
+            const messages = document.getElementById("messages");
+            const div = document.createElement("div");
+            div.className = "msg " + type;
+            div.textContent = (type === "user" ? "🧑 " : "🤖 ") + text;
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+    </script>
+</body>
+</html>
