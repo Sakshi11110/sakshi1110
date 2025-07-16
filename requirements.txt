@@ -270,5 +270,4 @@ zipp==3.23.0
 zope.interface==7.2
 zstandard==0.23.0
 fastapi
-langchain_community==0.0.21  # example version
 openai==1.3.3
